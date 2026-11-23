@@ -1,8 +1,8 @@
 class Floresta < Formula
   desc "Lightweight and embeddable Bitcoin client, built for sovereignty"
   homepage "https://getfloresta.org"
-  url "https://github.com/getfloresta/Floresta/archive/refs/tags/v0.9.1.tar.gz"
-  sha256 "47dbff1991bd9ee8f8880a0762e4c7ee8b095b93c755529a6e0805fa9ea1cf9f"
+  url "https://github.com/getfloresta/Floresta/archive/refs/tags/v0.10.0.tar.gz"
+  sha256 "47b0526b9b669d51ccb1ddce0df8f5d9f8c6bcbaadd5f5b4bbbd5416ad343bae"
   license any_of: [
     "MIT",
     "Apache-2.0",
@@ -34,11 +34,6 @@ class Floresta < Formula
   allow_network_access! :test
 
   def fetch
-    odie "Remove `bitcoinkernel` pin!" if build.stable? && version > "0.9.1"
-    # `bitcoinkernel` 0.2.0 vendors a Bitcoin Core that fails to build against
-    # boost 1.92. Upstream pinned 0.2.1 in
-    # https://github.com/getfloresta/Floresta/commit/7ad1324f7a72272b54820138b617b31a19cf5990
-    system "cargo", "update", "-p", "bitcoinkernel", "--precise", "0.2.1"
     system "cargo", "fetch", *std_cargo_fetch_args
   end
 
